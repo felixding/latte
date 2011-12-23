@@ -12,14 +12,6 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :creator_id %><br />
-    <%= f.number_field :creator_id %>
-  </div>
-  <div class="field">
-    <%= f.label :updater_id %><br />
-    <%= f.number_field :updater_id %>
-  </div>
-  <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
@@ -30,6 +22,10 @@
   <div class="field">
     <%= f.label :subdomain %><br />
     <%= f.text_field :subdomain %>
+  </div>
+  <div class="field">
+    <%= f.label :content_index %><br />
+    <%= f.text_area :content_index %>
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111222100850) do
+ActiveRecord::Schema.define(:version => 20111223074722) do
 
   create_table "edtions", :force => true do |t|
     t.integer  "project_id"
@@ -32,7 +32,10 @@ ActiveRecord::Schema.define(:version => 20111222100850) do
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "ancestry"
   end
+
+  add_index "pages", ["ancestry"], :name => "index_pages_on_ancestry"
 
   create_table "projects", :force => true do |t|
     t.integer  "creator_id"

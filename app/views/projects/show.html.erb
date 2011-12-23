@@ -24,6 +24,10 @@
   <b>Subdomain:</b>
   <%= @project.subdomain %>
 </p>
+<%#= content_tag :ol, raw([(content_tag(:li ,"yes"))].join) %>
+<!--%w(#{raw concat()}) #{concat(content_tag(:li ,"world"))} -->
+<%#= nested_ordered_list @project.pages %>
+<%= nested_ordered_list @project, @project.pages.arrange(:order => :created_at)  %>
 
 
 <%= link_to 'Edit', edit_project_path(@project) %> |

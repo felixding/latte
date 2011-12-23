@@ -7,7 +7,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<% if user_signed_in? %>
+<%= current_user.email %>
+<% else %>
+<%= link_to "login", new_user_session_path %>
+<% end %>
 <%= yield %>
 
 </body>

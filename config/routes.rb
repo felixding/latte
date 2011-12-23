@@ -1,11 +1,12 @@
 Latte::Application.routes.draw do
-  resources :edtions
-
-  resources :pages
-
-  resources :projects
+  resources :projects do
+    resources :pages
+    resources :edtions
+  end
 
   devise_for :users
+  
+  root :to => 'static#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

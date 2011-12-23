@@ -4,6 +4,7 @@ gem 'rails', '3.1.3'
 
 gem 'paper_trail', '~> 2'
 gem "devise"
+gem "ancestry"
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
