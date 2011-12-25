@@ -1,4 +1,4 @@
-<%= form_for(@edtion) do |f| %>
+<%= form_for([@project, @edtion], :html => {:class => :basic}) do |f| %>
   <% if @edtion.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@edtion.errors.count, "error") %> prohibited this edtion from being saved:</h2>
@@ -11,31 +11,15 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :project_id %><br />
-    <%= f.number_field :project_id %>
-  </div>
-  <div class="field">
-    <%= f.label :creator_id %><br />
-    <%= f.number_field :creator_id %>
-  </div>
-  <div class="field">
-    <%= f.label :project_version %><br />
-    <%= f.number_field :project_version %>
-  </div>
-  <div class="field">
-    <%= f.label :pages %><br />
-    <%= f.text_area :pages %>
-  </div>
-  <div class="field">
+  <p class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name %>
-  </div>
-  <div class="field">
+  </p>
+  <p class="field">
     <%= f.label :intro %><br />
     <%= f.text_area :intro %>
-  </div>
-  <div class="actions">
+  </p>
+  <p class="actions">
     <%= f.submit %>
-  </div>
+  </p>
 <% end %>

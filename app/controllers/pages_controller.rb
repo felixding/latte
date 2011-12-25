@@ -1,4 +1,7 @@
 class PagesController < ApplicationController
+  before_filter :authenticate_user!, :except => [:show]
+  before_filter :find_or_404, :only => [:show, :trunk, :edit, :update, :destroy]  
+
   # GET /pages
   # GET /pages.json
   def index
@@ -13,12 +16,7 @@ class PagesController < ApplicationController
   # GET /pages/1
   # GET /pages/1.json
   def show
-    @page = Page.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @page }
-    end
+    render "projects/trunk"
   end
 
   # GET /pages/new
@@ -34,7 +32,6 @@ class PagesController < ApplicationController
 
   # GET /pages/1/edit
   def edit
-    @page = Page.find(params[:id])
   end
 
   # POST /pages
@@ -56,28 +53,33 @@ class PagesController < ApplicationController
   # PUT /pages/1
   # PUT /pages/1.json
   def update
-    @page = Page.find(params[:id])
+    @page.project_id = @project.id
+    @page.updater_id = current_user.id
 
-    respond_to do |format|
-      if @page.update_attributes(params[:page])
-        format.html { redirect_to @page, notice: 'Page was successfully updated.' }
-        format.json { head :ok }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @page.errors, status: :unprocessable_entity }
-      end
+    if @page.update_attributes(params[:page])
+      redirect_to [@project, @page], notice: 'Page was successfully updated.'
+    else
+      render action: "edit"
     end
   end
 
   # DELETE /pages/1
   # DELETE /pages/1.json
   def destroy
+    @project = Project.find_by_slug(params[:project_id])
     @page = Page.find(params[:id])
     @page.destroy
 
     respond_to do |format|
-      format.html { redirect_to pages_url }
+      format.html { redirect_to (:back || @project) }
       format.json { head :ok }
     end
+  end
+  
+  private
+  
+  def find_or_404
+    @project = Project.find_by_slug(params[:project_id])
+    @page = Page.find(params[:id])
   end
 end

@@ -1,18 +1,32 @@
 class Project < ActiveRecord::Base
+  versioned
+  INDENT_MARKER = "\-"  
+
   belongs_to :creator, :class_name => "User", :foreign_key => "creator_id"
   belongs_to :updater, :class_name => "User", :foreign_key => "updater_id"
   has_many :pages, :dependent => :destroy
+  has_many :edtions, :class_name => "Edtion", :dependent => :destroy
+  
+#  attr_reader :content_index
+  
+#  def content_index=(value)
+    #@content_index = value
+ # end
 
   attr_reader :content_index
   attr_writer :content_index
-  attr_accessible :name, :intro, :content_index
-  
-  INDENT_MARKER = "\-"
+  def content_index
+    self.pages.collect do |page|
+      ((0..page.depth).collect{INDENT_MARKER}.join unless page.is_root?).to_s + page.title
+    end.join("\n")
+  end
+
+  attr_accessible :name, :intro, :content_index  
   
   validates_presence_of :name, :on => :save
   validates_presence_of :creator_id, :on => :create
   validates_presence_of :updater_id, :on => :save
-  validates_presence_of :subdomain, :on => :create
+  validates_presence_of :slug, :on => :create
   #validates_presence_of :content_index, :on => :save, :allow_nil => false, :allow_blank => false
   validates :content_index, :presence => true
   
@@ -41,7 +55,7 @@ class Project < ActiveRecord::Base
   end
   
   def to_param
-    subdomain
+    slug
   end
 
 end

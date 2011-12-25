@@ -1,4 +1,7 @@
 class ProjectsController < ApplicationController
+  before_filter :authenticate_user!, :except => [:show]
+  before_filter :find_by_slug_or_404, :only => [:show, :trunk, :edit, :update, :destroy]
+
   # GET /projects
   # GET /projects.json
   def index
@@ -13,12 +16,15 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
-    @project = Project.find(params[:id])
-
+    @edtion = @project.edtions.last unless @project.edtions.empty?
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @project }
     end
+  end
+
+  def trunk
+    @page = @project.pages.first
   end
 
   # GET /projects/new
@@ -34,14 +40,13 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
-    @project = Project.find(params[:id])
   end
 
   # POST /projects
   # POST /projects.json
   def create
     @project = current_user.projects.build(params[:project])
-    @project.subdomain = params[:project][:subdomain]
+    @project.slug = params[:project][:slug]
     
 #    raise @project.inspect + @project.valid?.to_s
 
@@ -59,8 +64,6 @@ class ProjectsController < ApplicationController
   # PUT /projects/1
   # PUT /projects/1.json
   def update
-    @project = Project.find(params[:id])
-
     respond_to do |format|
       if @project.update_attributes(params[:project])
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
@@ -75,7 +78,6 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1
   # DELETE /projects/1.json
   def destroy
-    @project = Project.find(params[:id])
     @project.destroy
 
     respond_to do |format|

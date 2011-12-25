@@ -1,0 +1,22 @@
+<div class="page-header">
+	<h1>Layouts <small>Basic templates to create webpages</small></h1>
+</div>
+<% #raise @project.pages.arrange(:order => :created_at).size.inspect%>
+<%= clearfix %>
+<div class="fluid">
+	<div class="secondary">
+		<div class="wrapper">
+			<h2><%= @page.title %></h2>
+			<% if user_signed_in? && current_user.owns?(@page, :column => :creator_id) %>
+			<%= link_to "Edit", edit_project_page_path(@project, @page) %> | <%= link_to "Destroy", [@project, @page], :method => :delete, :confirm => "Are you sure?" %>
+			<% end %>
+			<div class="body"><%= simple_format @page.body %></div>
+		</div>
+	</div>
+	
+	<div class="primary">
+		<div class="pages-list">
+			<%= nested_ordered_list @project, @project.pages.arrange(:order => :created_at) %>
+		</div>
+	</div>
+</div>

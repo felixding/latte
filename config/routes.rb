@@ -1,10 +1,31 @@
 Latte::Application.routes.draw do
   resources :projects do
+    member do
+      get "trunk"
+    end
+
     resources :pages
-    resources :edtions
+    resources :edtions, :except => [:edit, :update]
   end
 
-  devise_for :users
+  devise_for :user, :path => '', :path_names => { :sign_in => 'login', :sign_out => 'logout' }, :skip => [:registration], :controllers => { :registrations => "users" } do
+    #resource :registration, :only => [:edit, :update, :destroy], :as => :user_registration, :path => 'profile', :controller => 'devise/registrations'
+    
+    scope :controller => 'users' do
+      get  :new,     :path => 'signup' , :as => :new_user_registration
+      post :create,  :path => 'signup', :as => :user_registration
+    end
+    
+    
+    scope "/profile", :defaults => { :section => "account" } do
+      get "/:section" => "users#edit", :as => "edit_user_registration"
+      put "/:section" => "users#update", :as => "update_user_registration"
+    end
+    
+    get "/inactive" => "users#inactive", :as => :inactive
+
+    resources :users, :only => [:show], :path => "/u"
+  end
   
   root :to => 'static#index'
 

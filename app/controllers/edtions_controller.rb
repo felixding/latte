@@ -1,4 +1,6 @@
 class EdtionsController < ApplicationController
+  before_filter :authenticate_user!, :except => [:show]
+
   # GET /edtions
   # GET /edtions.json
   def index
@@ -24,7 +26,8 @@ class EdtionsController < ApplicationController
   # GET /edtions/new
   # GET /edtions/new.json
   def new
-    @edtion = Edtion.new
+    @project = Project.find_by_subdomain(params[:project_id])
+    @edtion = @project.edtions.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,11 +43,12 @@ class EdtionsController < ApplicationController
   # POST /edtions
   # POST /edtions.json
   def create
-    @edtion = Edtion.new(params[:edtion])
+    @project = Project.find_by_subdomain(params[:project_id])
+    @edtion = @project.edtions.build(params[:edtion])
 
     respond_to do |format|
       if @edtion.save
-        format.html { redirect_to @edtion, notice: 'Edtion was successfully created.' }
+        format.html { redirect_to [@project, @edtion], notice: 'Edtion was successfully created.' }
         format.json { render json: @edtion, status: :created, location: @edtion }
       else
         format.html { render action: "new" }

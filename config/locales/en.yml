@@ -2,4 +2,11 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+    time:
+        formats:
+            us:
+                "%B %-d, %Y"
+    date:
+        formats:
+            us:
+                "%B %-d, %Y"

@@ -1,4 +1,4 @@
-<%= form_for(@page) do |f| %>
+<%= form_for([@project, @page], :html => {:class => :basic}) do |f| %>
   <% if @page.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@page.errors.count, "error") %> prohibited this page from being saved:</h2>
@@ -11,27 +11,15 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :project_id %><br />
-    <%= f.number_field :project_id %>
-  </div>
-  <div class="field">
-    <%= f.label :creator_id %><br />
-    <%= f.number_field :creator_id %>
-  </div>
-  <div class="field">
-    <%= f.label :updater_id %><br />
-    <%= f.number_field :updater_id %>
-  </div>
-  <div class="field">
+  <p class="field">
     <%= f.label :title %><br />
     <%= f.text_field :title %>
-  </div>
-  <div class="field">
+  </p>
+  <p class="field">
     <%= f.label :body %><br />
     <%= f.text_area :body %>
-  </div>
-  <div class="actions">
+  </p>
+  <p class="actions">
     <%= f.submit %>
-  </div>
+  </p>
 <% end %>

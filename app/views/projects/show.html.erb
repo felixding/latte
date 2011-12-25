@@ -1,34 +1,37 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Creator:</b>
-  <%= @project.creator_id %>
-</p>
-
-<p>
-  <b>Updater:</b>
-  <%= @project.updater_id %>
-</p>
-
-<p>
-  <b>Name:</b>
-  <%= @project.name %>
-</p>
-
-<p>
-  <b>Intro:</b>
-  <%= @project.intro %>
-</p>
-
-<p>
-  <b>Subdomain:</b>
-  <%= @project.subdomain %>
-</p>
-<%#= content_tag :ol, raw([(content_tag(:li ,"yes"))].join) %>
-<!--%w(#{raw concat()}) #{concat(content_tag(:li ,"world"))} -->
-<%#= nested_ordered_list @project.pages %>
-<%= nested_ordered_list @project, @project.pages.arrange(:order => :created_at)  %>
-
-
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
+<div class="page-header">
+	<h1><%= title @project.name %> <small>Basic templates to create webpages</small></h1>
+</div>
+<%= clearfix %>
+<div class="primary">
+	<table class="basic">
+		<tr>
+			<td class="field">Name</td>
+			<td><%= @project.name %> <%= link_to 'Edit', edit_project_path(@project) %></td>
+		</tr>
+		<tr>
+			<td class="field">Creator</td>
+			<td><%= @project.creator.name %></td>
+		</tr>
+		<% if @project.updater_id? %>
+		<tr>
+			<td class="field">Last updated by</td>
+			<td><%= @project.updater.name %></td>
+		</tr>
+		<% end %>
+		<tr>
+			<td class="field">Intro</td>
+			<td><%= simple_format @project.intro %></td>
+		</tr>
+		<tr>
+			<td class="field">Created at</td>
+			<td><%= l @project.created_at, :format => :us %></td>
+		</tr>
+	</table>
+</div>
+<div class="secondary">
+	<h2>Edtions</h2>
+	<ul>
+		<li><%= cta @edtion.name, [@project, @edtion] if @edtion %></li>
+		<li><%= link_to "Trunk", trunk_project_path %></li>
+	</ul>
+</div>

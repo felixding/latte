@@ -1,0 +1,300 @@
+@import "mixins";
+
+.widget {
+	margin-bottom: 30px;
+	overflow: hidden;
+	
+	li {
+		margin: 10px 0;
+	}
+	
+	.more {
+		font-size: 14px;
+	}
+}
+
+div.pagination {
+	margin: 10px 0;
+	
+	em {
+		padding: 10px;
+	}
+
+	.current {
+		background: #aaa;
+		color: #fff;
+	}
+
+ 	a {
+		padding: 10px;
+	}
+}
+
+#flash {	
+	div {
+		margin: 10px auto;
+		color: white;
+		font-size: 14px;
+		padding: 10px;
+	}
+	
+	.notice {
+		background: #94bd41;
+	}
+	
+	.warning {
+		background: #fc9729;
+	}
+	
+	.error {
+		background: #e75151;
+	}
+	
+	&.fadeout {
+		left: 0;
+	    margin: 0;
+	    padding: 0;
+	    position: absolute;
+	    top: 0;
+	    width: 100%;
+	    z-index: 999;
+		display: none;
+	
+		div {
+			margin: 0 auto;
+		}
+	}
+}
+
+table.basic {
+	border: none;
+	border-collapse: collapse;
+	border-spacing: 0;
+	font-size: 12px;
+	margin: 0;
+	padding: 0;
+	text-align: left;
+	width: 100%;
+	
+	td, & th {
+		margin: 0;
+		padding: 10px;
+	}
+	
+	th {
+		background-color: #eee;
+		border-top: 2px solid #ccc;
+		border-bottom: 1px solid #ccc;
+	}
+	
+	td {
+		border-top: 1px solid #ccc;
+		
+		.actions a {
+			margin-right: 10px;
+		}
+		
+		&.field {
+			background: #eee;
+		}
+	}
+	
+	tr:last-child {
+		border-bottom: 1px solid #ccc;
+	}
+}
+
+/* call to action*/
+.cta {
+	display: inline-block;
+	
+	&:hover {
+		text-decoration: none;
+	}
+		
+	span {
+		background: #53a440;
+		color: #fff;
+		display: block;
+		padding: 5px 10px;
+		
+		&:hover {
+			background: #888;
+		}
+	}
+}
+
+
+/* @group ul.tabs */
+div.tab {
+	clear: both;
+	margin-bottom: 10px;
+	overflow: hidden;
+	width: 100%;
+	border: none;
+	
+	ul.tab {
+		border-bottom: 1px solid #CCC;
+		padding-left: 16px;
+		zoom: 1;
+		margin: 0px;
+		padding: 0.2em 0.2em 0px;
+		position: relative;
+		border: none;
+		border-bottom: 1px solid #CCC;
+		
+		&:after {
+			content: "";
+			display: block;
+			height: 0;
+			clear: both;
+		}
+		
+		li {
+			border: solid 1px #CCC;
+	    	border-bottom: 0;
+	    	float: left;
+	    	list-style: none;
+	    	margin: 0px 5px 1px 0px;
+	    	padding: 0px;
+	    	position: relative;
+	    	top: 1px;
+	    	white-space: nowrap;
+	    	border-radius: 0;
+	    	
+			&.current {
+	      		margin-bottom: 0px;
+	      		padding-bottom: 1px;
+	      		background: white;
+	
+				a {
+					color: #000;
+					
+					&:hover {
+						background: transparent;
+					}
+				}
+			}
+			
+			a {
+				float: left;
+				padding: 3px 13px;
+				text-decoration: none;
+				cursor: pointer;
+			}
+		}
+	}
+	
+	.ui-tabs-hide {
+  		display: none;
+	}
+}
+/* @end */
+
+.toolbar {
+	overflow: hidden;
+
+	.left {
+		float: left;
+	}
+	
+	.right {
+		float: right;
+	}
+}
+
+/* @form.basic */
+form.basic {
+	label {
+		color: black;
+	}
+
+	input[type=text], input[type=password], input[type=email], textarea {
+		width: 400px;
+		padding: 5px;
+		font-size: 1em;
+		color: #555;
+		border: 2px inset;
+		border:1px solid #ccc;
+		-webkit-border-radius:0px;
+		-moz-border-radius:0px;
+		border-radius:0px;
+		-webkit-transition:border linear 0.2s,box-shadow linear 0.2s;
+		-moz-transition:border linear 0.2s,box-shadow linear 0.2s;
+		-ms-transition:border linear 0.2s,box-shadow linear 0.2s;
+		-o-transition:border linear 0.2s,box-shadow linear 0.2s;
+		transition:border linear 0.2s,box-shadow linear 0.2s;
+		-webkit-box-shadow:inset 0 1px 3px rgba(0, 0, 0, 0.1);
+		-moz-box-shadow:inset 0 1px 3px rgba(0, 0, 0, 0.1);
+		box-shadow:inset 0 1px 3px rgba(0, 0, 0, 0.1);
+	}
+	
+	textarea {
+		resize: vertical;
+		height: 150px;
+	}
+
+	input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, textarea:focus {
+		outline: 0;
+		border-color: #53a440;
+		background: #fafafa;
+		outline:0;border-color:rgba(82, 168, 236, 0.8);-webkit-box-shadow:inset 0 1px 3px rgba(0, 0, 0, 0.1),0 0 8px rgba(82, 168, 236, 0.6);-moz-box-shadow:inset 0 1px 3px rgba(0, 0, 0, 0.1),0 0 8px rgba(82, 168, 236, 0.6);box-shadow:inset 0 1px 3px rgba(0, 0, 0, 0.1),0 0 8px rgba(82, 168, 236, 0.6);
+	}
+	
+	.error, #error_explanation {
+		color: red;
+	}
+	
+	.field_with_errors {
+		input[type=text], input[type=password], input[type=email], textarea {
+			border: 1px solid red;
+		}
+	}
+	
+	.description {
+		color: #949494;
+	}
+	
+	p {
+		margin: 1.5em 0;
+	}
+	
+	.required_mark {
+		margin-left: 0em;
+		color: red;
+	}
+
+	.radio {
+		border: 1px solid #ccc;
+		padding: 10px;
+		margin: 0 0 0 0;
+		@include rounded(3px);
+		
+		&:nth-child(odd) {
+			border-bottom: 0;
+		}
+		
+		&.checked {
+			background: #eee;
+			&:hover {
+				background: #eee;
+			}
+		}
+		
+		&:hover {
+			background: #eee;
+			cursor: pointer;
+		}
+	}
+}
+/* @end */
+
+
+img.avatar {
+	width: 50px;
+	height: 50px;
+}
+
+.clearfix {
+	clear: both;
+}

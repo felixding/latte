@@ -1,3 +1,21 @@
-// Place all the styles related to the Projects controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "variables";
+
+.pages-list {
+	ul, ol {
+		margin: 0;
+		padding: 0 0 0 18px;
+		
+		li {
+			margin: 5px 0;
+			padding: 0;
+			
+			&.current {
+				span {
+					background: $color_green;
+					padding: 2px 6px;
+					color: #fff;
+				}
+			}
+		}
+	}
+}
