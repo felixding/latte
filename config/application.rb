@@ -41,6 +41,10 @@ module Latte
 
     # Enable the asset pipeline
     config.assets.enabled = true
+    
+    # auto load
+    config.autoload_paths += %W(#{config.root}/lib)
+    config.autoload_paths += Dir["#{config.root}/lib/**/"]
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
