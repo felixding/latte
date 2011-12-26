@@ -9,6 +9,7 @@ gem 'vestal_versions', :git => 'git://github.com/adamcooper/vestal_versions'
 gem "devise"
 gem "ancestry"
 #gem 'bootstrap-sass', '~> 1.4.2'
+gem "paperclip"
 gem "ckeditor"
 
 # Bundle edge Rails instead:

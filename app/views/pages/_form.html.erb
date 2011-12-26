@@ -1,3 +1,5 @@
+<%= javascript_include_tag "/javascripts/ckeditor/ckeditor.js" %>
+
 <%= form_for([@project, @page], :html => {:class => :basic}) do |f| %>
   <% if @page.errors.any? %>
     <div id="error_explanation">
@@ -17,7 +19,8 @@
   </p>
   <p class="field">
     <%= f.label :body %><br />
-    <%= f.text_area :body %>
+    <%#= f.text_area :body %>
+	<%= f.cktext_area :body %>
   </p>
   <p class="actions">
     <%= f.submit %>
