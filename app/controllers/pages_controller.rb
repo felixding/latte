@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
-  before_filter :authenticate_user!, :except => [:show]
-  before_filter :find_or_404, :only => [:show, :trunk, :edit, :update, :destroy]  
+  before_filter :authenticate_user!, :except => [:show, :show_edition_page]
+  before_filter :find_or_404, :only => [:show, :show_edition_page, :trunk, :edit, :update, :destroy]
 
   # GET /pages
   # GET /pages.json
@@ -16,6 +16,23 @@ class PagesController < ApplicationController
   # GET /pages/1
   # GET /pages/1.json
   def show
+#    raise @project.pages.first.inspect
+    @pages = @project.pages.arrange(:order => :created_at)
+    render "projects/trunk"
+  end
+  
+  def show_edition_page
+    unless @edition = @project.editions.find(params[:edition_id])
+      render_error "404"
+      return
+    end
+
+    @page_version = @edition.pages.select{|page| page.first == @page.id}.first.last
+    @page.revert_to @page_version
+    
+    @project = @edition.versioned_project
+    @pages = @project.pages.arrange_nodes(@edition.versioned_pages)
+    
     render "projects/trunk"
   end
 

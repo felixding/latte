@@ -1,37 +1,52 @@
-<div class="page-header">
-	<h1><%= title @project.name %> <small>Basic templates to create webpages</small></h1>
-</div>
-<%= clearfix %>
+<%= render "projects/header" %>
+
 <div class="primary">
-	<table class="basic">
-		<tr>
-			<td class="field">Name</td>
-			<td><%= @project.name %> <%= link_to 'Edit', edit_project_path(@project) %></td>
-		</tr>
-		<tr>
-			<td class="field">Creator</td>
-			<td><%= @project.creator.name %></td>
-		</tr>
-		<% if @project.updater_id? %>
-		<tr>
-			<td class="field">Last updated by</td>
-			<td><%= @project.updater.name %></td>
-		</tr>
-		<% end %>
-		<tr>
-			<td class="field">Intro</td>
-			<td><%= simple_format @project.intro %></td>
-		</tr>
-		<tr>
-			<td class="field">Created at</td>
-			<td><%= l @project.created_at, :format => :us %></td>
-		</tr>
-	</table>
+	<div class="widget">
+		<h2>Overview</h2>
+		<table class="basic">
+			<tr>
+				<td class="field">Name</td>
+				<td><%= @project.name %></td>
+			</tr>
+			<tr>
+				<td class="field">Creator</td>
+				<td><%= @project.creator.name %></td>
+			</tr>
+			<% if @project.updater_id? %>
+			<tr>
+				<td class="field">Last updated by</td>
+				<td><%= @project.updater.name %></td>
+			</tr>
+			<% end %>
+			<% if @project.intro? %>
+			<tr>
+				<td class="field">Intro</td>
+				<td><%= simple_format @project.intro %></td>
+			</tr>
+			<% end %>
+			<tr>
+				<td class="field">Created at</td>
+				<td><%= l @project.created_at, :format => :us %></td>
+			</tr>
+		</table>
+	</div>
+	
+	<div class="widget">
+		<h2>Editions</h2>
+		<ul>
+			<li><%= link_to "Trunk", trunk_project_path %></li>
+			<% if @edition %><li><%= link_to @edition.name, [@project, @edition] %></li><% end %>
+		</ul>
+	</div>
 </div>
 <div class="secondary">
-	<h2>Edtions</h2>
-	<ul>
-		<li><%= cta @edtion.name, [@project, @edtion] if @edtion %></li>
-		<li><%= link_to "Trunk", trunk_project_path %></li>
-	</ul>
+	<% if user_signed_in? && current_user.owns?(@project, :column => :creator_id) %>
+	<div class="widget">
+		<ul>
+			<li><%= link_to "Create Edition", new_project_edition_path(@project) %></li>
+			<li><%= link_to 'Edit', edit_project_path(@project) %></li>
+			<li><%= link_to 'Delete', @project, :method => :delete, :confirm => "Are you sure?" %></li>
+		</ul>
+		<% end %>
+	</div>
 </div>

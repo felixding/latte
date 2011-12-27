@@ -4,10 +4,6 @@
 	margin-bottom: 30px;
 	overflow: hidden;
 	
-	li {
-		margin: 10px 0;
-	}
-	
 	.more {
 		font-size: 14px;
 	}
@@ -297,4 +293,25 @@ img.avatar {
 
 .clearfix {
 	clear: both;
+}
+
+.page-header {
+	h1 {
+		padding: 10px 0;
+		border-bottom: 3px solid #CCC;
+		
+		small {
+			color: #444;
+			font-size: 0.6em;
+			line-height: 0.6em;
+		}
+	}
+}
+
+h2 .version {
+	font-size: 0.6em;
+	line-height: 0.6em;
+	background: #333;
+	color: #fff;
+	padding: 1px 2px;
 }

@@ -4,7 +4,6 @@ body {
 	font: 12px / 150% "Lucida Grande", Arial, Helvetica, Verdana, sans-serif;
 	margin: 0;
 	padding: 20px;
-	width: 920px;
 	color: $color_body;
 }
 
@@ -44,12 +43,12 @@ h1 a {
 	padding-bottom: 10px;
 	border-bottom: 2px solid #eee;*/
 	
-	background: #EEE;
+	background: #653d10;
 	position: absolute;
 	left: 0;
 	top: 0;
 	width: 100%;
-	border-bottom: 1px solid #CCC;
+	border-bottom: 2px solid #382108;
 	overflow: hidden;
 
 	#logo {
@@ -61,48 +60,40 @@ h1 a {
 		width: 400px;
 		
 		a {
-			color: $color_green;
+			color: #fff;
+			background: url(logo-40x40.png) no-repeat 0 -5px;
 			margin: 0;
-			float: left;
-		}
-
-		#slogan {
-			margin-left: 1px;
-			margin-top: 3px;
-			padding-left: 6px;
-			border-left: 1px solid $color_blue;
-			color: $color_blue;
-			font-size: 0.8em;
-			float: left;
+			padding: 5px 0 6px 50px;
+			display: block;
 		}
 	}
 	
 	#navigation {
 		float: left;
 		margin-left: 0px;
+		margin-top: 6px;
+		
+		a {
+			color: #fff;
+		}
 	}
 	
 	#user-bar {
 		float: right;
+		margin-top: 6px;
 		
 		a {
-			color: #888;
-			
-			&.current {
-				background: #888;
-				color: white;
-				text-decoration: none;
-			}			
+			color: #ccc;		
 		}
 	}
 	
 	a {
 		color: black;
 		margin-left: 10px;
-		padding: 2px 4px;
+		padding: 0 0 2px 0;
 		
 		&.current {
-			background: #777;
+			border-bottom: 2px solid;
 			color: white;
 			text-decoration: none;
 		}

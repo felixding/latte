@@ -1,11 +1,9 @@
 <div id="header">
 	<div class="wrapper">
-		<div id="logo"><%= link_to "Latte", root_path %> <%#<span id="slogan" class="hidden">ebooks collection in the cloud</span>%></div>
+		<div id="logo"><%= link_to "Latte", root_path %></div>
 
 		<div id="navigation">
 			<% if user_signed_in? %>
-			<%= link_to "QBOX", project_path("qbox"), :class => current_or_null((controller.controller_name == "projects" && controller.action_name == "show")) %>
-			<%= link_to "Create Edtion", new_project_edtion_path("qbox"), :class => current_or_null((controller.controller_name == "edtions" && controller.action_name == "new")) %>
 			<% else %>
 			<%= link_to "Home", root_path, :class => current_or_null(controller.controller_name == "static" && controller.action_name == "index") %>
 			<% end %>
@@ -17,7 +15,7 @@
 		    	<%= link_to "Profile", edit_user_registration_path, :class => current_or_null(controller.controller_name == "users" && controller.action_name == "edit") %>
 		    	<%= link_to "Log out", destroy_user_session_path, :method => 'delete' %>
 			<% else %>
-				<%= link_to "Sign up for free", new_user_registration_path, :id => :sign_up, :class => current_or_null(controller.controller_name == "users" && (controller.action_name == "new" || controller.action_name == "create")) %>
+				<%#= link_to "Sign up for free", new_user_registration_path, :id => :sign_up, :class => current_or_null(controller.controller_name == "users" && (controller.action_name == "new" || controller.action_name == "create")) %>
 				<%= link_to "Log in", new_user_session_path, :id => :login, :class => current_or_null(controller.controller_name == "sessions" && controller.action_name == "new") %>
 			<% end %>
 		</div>

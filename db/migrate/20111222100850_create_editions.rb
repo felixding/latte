@@ -1,6 +1,6 @@
-class CreateEdtions < ActiveRecord::Migration
+class CreateEditions < ActiveRecord::Migration
   def change
-    create_table :edtions do |t|
+    create_table :editions do |t|
       t.integer :project_id
       t.integer :creator_id
       t.integer :project_version

@@ -1,22 +1,18 @@
 class Project < ActiveRecord::Base
   versioned
-  INDENT_MARKER = "\-"  
+  INDENT_MARKER = "\-"
 
   belongs_to :creator, :class_name => "User", :foreign_key => "creator_id"
   belongs_to :updater, :class_name => "User", :foreign_key => "updater_id"
   has_many :pages, :dependent => :destroy
-  has_many :edtions, :class_name => "Edtion", :dependent => :destroy
+  has_many :editions, :class_name => "Edition", :dependent => :destroy
   
-#  attr_reader :content_index
-  
-#  def content_index=(value)
-    #@content_index = value
- # end
+  def content_index=(value)
+    @content_index = value
+  end
 
-  attr_reader :content_index
-  attr_writer :content_index
   def content_index
-    self.pages.collect do |page|
+    @content_index ||= self.pages.collect do |page|
       ((0..page.depth).collect{INDENT_MARKER}.join unless page.is_root?).to_s + page.title
     end.join("\n")
   end

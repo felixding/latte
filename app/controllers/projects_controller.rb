@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_filter :authenticate_user!, :except => [:show]
+  before_filter :authenticate_user!, :except => [:show, :trunk]
   before_filter :find_by_slug_or_404, :only => [:show, :trunk, :edit, :update, :destroy]
 
   # GET /projects
@@ -16,7 +16,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
-    @edtion = @project.edtions.last unless @project.edtions.empty?
+    @edition = @project.editions.last unless @project.editions.empty?
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @project }
@@ -25,6 +25,7 @@ class ProjectsController < ApplicationController
 
   def trunk
     @page = @project.pages.first
+    redirect_to url_for([@project, @page])
   end
 
   # GET /projects/new

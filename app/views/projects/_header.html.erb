@@ -1,0 +1,12 @@
+<div class="page-header ">
+	<h1>
+		<%= link_to_unless_current title(@project.name), @project %>
+		<%#= link_to_unless_current content_tag(:small, @edition.name), [@project, @edition] if @edition %>
+		<% if controller.controller_name == "pages" && controller.action_name == "show" %>
+			<%= content_tag(:small, "Trunk") %>
+		<% elsif controller.controller_name == "pages" && controller.action_name == "show_edition_page" %>
+			<%= content_tag(:small, @edition.name) %>
+		<% end %>
+	</h1>
+</div>
+<%= clearfix %>

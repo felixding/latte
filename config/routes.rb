@@ -5,16 +5,19 @@ Latte::Application.routes.draw do
     end
 
     resources :pages
-    resources :edtions, :except => [:edit, :update]
+
+    resources :editions, :except => [:edit, :update] do
+      get "/pages/:id" => "pages#show_edition_page", :as => :page
+    end
   end
 
   devise_for :user, :path => '', :path_names => { :sign_in => 'login', :sign_out => 'logout' }, :skip => [:registration], :controllers => { :registrations => "users" } do
     #resource :registration, :only => [:edit, :update, :destroy], :as => :user_registration, :path => 'profile', :controller => 'devise/registrations'
     
-    scope :controller => 'users' do
-      get  :new,     :path => 'signup' , :as => :new_user_registration
-      post :create,  :path => 'signup', :as => :user_registration
-    end
+    #scope :controller => 'users' do
+      #get  :new,     :path => 'signup' , :as => :new_user_registration
+      #post :create,  :path => 'signup', :as => :user_registration
+    #end
     
     
     scope "/profile", :defaults => { :section => "account" } do

@@ -1,10 +1,10 @@
-<%= form_for([@project, @edtion], :html => {:class => :basic}) do |f| %>
-  <% if @edtion.errors.any? %>
+<%= form_for([@project, @edition], :html => {:class => :basic}) do |f| %>
+  <% if @edition.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@edtion.errors.count, "error") %> prohibited this edtion from being saved:</h2>
+      <h2><%= pluralize(@edition.errors.count, "error") %> prohibited this edition from being saved:</h2>
 
       <ul>
-      <% @edtion.errors.full_messages.each do |msg| %>
+      <% @edition.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
