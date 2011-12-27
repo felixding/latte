@@ -27,26 +27,19 @@ class Project < ActiveRecord::Base
   validates :content_index, :presence => true
   
   after_create do |project|
-    previous_page_id = nil
+    ancestors = []
 
-    project.content_index.split("\n").each do |page_title|
-      page_title = page_title.strip
+    project.content_index.each_line do |title|
+        title.strip =~ /^(-*)(.*)$/
+        depth = $1.length
+        title = $2
+        p = project.pages.build(:title => title)
+        ancestors.pop until ancestors.length <= depth
+        p.parent_id = ancestors.last unless ancestors.empty?
+        p.creator_id = project.creator_id
 
-      next if page_title.blank?
-      
-      page = project.pages.build(:title => page_title)
-      page.creator_id = project.creator_id
-
-      if page_title.match(/^#{INDENT_MARKER}/)
-        page.title = page_title.gsub(/^#{INDENT_MARKER}*/, "")
-        page.parent_id = previous_page_id
-      end
-        
-      # save
-      page.save!
-      
-      # update previous_page_id
-      previous_page_id = page.id
+        p.save!
+        ancestors.push(p.id)
     end
   end
   
