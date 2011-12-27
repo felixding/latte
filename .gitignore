@@ -20,3 +20,6 @@ config/latte.yml
 .DS_Store
 
 public/ckeditor_assets/*
+
+Capfile
+config/deploy.rb
