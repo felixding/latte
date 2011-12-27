@@ -13,7 +13,7 @@ class Project < ActiveRecord::Base
 
   def content_index
     @content_index ||= self.pages.collect do |page|
-      ((0..page.depth).collect{INDENT_MARKER}.join unless page.is_root?).to_s + page.title
+      ((0..page.depth - 1).collect{INDENT_MARKER}.join unless page.is_root?).to_s + page.title
     end.join("\n")
   end
 
