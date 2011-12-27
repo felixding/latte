@@ -17,6 +17,7 @@ gem "ckeditor"
 
 #gem 'sqlite3'
 gem "mysql2"
+gem "pg"
 
 
 # Gems used only for assets and not required
