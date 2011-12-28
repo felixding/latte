@@ -7,7 +7,7 @@
 			<% if user_signed_in? && current_user.owns?(@page, :column => :creator_id) && controller.action_name != "show_edition_page" %>
 			<%= link_to "Edit", edit_project_page_path(@project, @page) %> | <%= link_to "Destroy", [@project, @page], :method => :delete, :confirm => "Are you sure?" %>
 			<% end %>
-			<div class="body"><%= @page.body %></div>
+			<div class="body"><%= raw @page.body %></div>
 		</div>
 	</div>
 	
