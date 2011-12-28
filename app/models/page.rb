@@ -10,7 +10,7 @@ class Page < ActiveRecord::Base
   validates_presence_of :creator_id
   validates_presence_of :updater_id, :on => :update
   validates_presence_of :title, :on => :save
-  validates_presence_of :body, :on => :update
+  #validates_presence_of :body, :on => :update
   
   attr_accessible :title, :body
 
