@@ -22,4 +22,4 @@ config/latte.yml
 public/ckeditor_assets/*
 
 #Capfile
-#config/deploy.rb
+config/deploy.rb
