@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   before_filter :authenticate_user!, :except => [:show, :trunk]
   before_filter :find_by_slug_or_404, :only => [:show, :trunk, :edit, :update, :destroy]
+  before_filter :hbaw, :only => [:show]
 
   # GET /projects
   # GET /projects.json
@@ -84,4 +85,5 @@ class ProjectsController < ApplicationController
       format.json { head :ok }
     end
   end
+
 end

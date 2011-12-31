@@ -21,4 +21,10 @@ class ApplicationController < ActionController::Base
   def render_error(status)
     render :template => "static/#{status}"
   end
+  
+  def hbaw
+    authenticate_or_request_with_http_basic ENV["LATTE_HBA_REALM"] do |username, password|
+      username == ENV["LATTE_HBA_USERNAME"] && password == ENV["LATTE_HBA_PASSWORD"]
+    end
+  end
 end

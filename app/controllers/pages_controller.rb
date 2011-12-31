@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
   before_filter :authenticate_user!, :except => [:show, :show_edition_page]
   before_filter :find_or_404, :only => [:show, :show_edition_page, :trunk, :edit, :update, :destroy]
+  before_filter :hbaw, :only => [:show, :show_edition_page]
 
   # GET /pages
   # GET /pages.json
