@@ -23,3 +23,5 @@ public/ckeditor_assets/*
 
 #Capfile
 config/deploy.rb
+
+config/initializers/env.local.rb
