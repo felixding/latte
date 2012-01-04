@@ -12,7 +12,7 @@ class Project < ActiveRecord::Base
   end
 
   def content_index
-    @content_index ||= self.pages.collect do |page|
+    @content_index ||= self.pages.all(:order => "index_id").collect do |page|
       ((0..page.depth - 1).collect{INDENT_MARKER}.join unless page.is_root?).to_s + page.id.to_s + "." + page.title
     end.join("\n")
   end
@@ -28,6 +28,7 @@ class Project < ActiveRecord::Base
   
   after_save do |project|
     ancestors = []
+    index_id = 1
 
     project.content_index.each_line do |title|
         title.strip =~ /^(-*)(\d*)(\.?)(.*)$/
@@ -43,6 +44,8 @@ class Project < ActiveRecord::Base
           # updating existing page
           p = project.pages.find(page_id)
         end
+        
+        p.index_id = index_id
 
         ancestors.pop until ancestors.length <= depth
         p.parent_id = ancestors.last unless ancestors.empty?
@@ -54,6 +57,7 @@ class Project < ActiveRecord::Base
         #end
 
         ancestors.push(p.id)
+        index_id += 1
     end
   end
   

@@ -11,6 +11,9 @@ class Page < ActiveRecord::Base
   validates_presence_of :updater_id, :on => :update
   validates_presence_of :title, :on => :save
   #validates_presence_of :body, :on => :update
+  validates_each :index_id do |model, attr, value|
+    #model.errors.add(:index_id, "Pages with same index_ids are not allowed.") if Page.exists?(project_id: model.project_id, index_id: model.index_id)
+  end
   
   attr_accessible :title, :body
 
