@@ -124,7 +124,7 @@ h1 a {
 	}
 	
 	.fluid {
-		overflow: auto;
+		overflow: hidden;
 	
 		.primary {
 			float: left;
@@ -141,6 +141,7 @@ h1 a {
 			.wrapper {
 				padding: 0 20px;
 				margin-left: 210px;
+				overflow: auto;
 			}
 		}
 	}
