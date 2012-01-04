@@ -18,7 +18,7 @@ class PagesController < ApplicationController
   # GET /pages/1.json
   def show
 #    raise @project.pages.first.inspect
-    @pages = @project.pages.arrange(:order => :created_at)
+    @pages = @project.pages.arrange(:order => :index_id)
     render "projects/trunk"
   end
   
