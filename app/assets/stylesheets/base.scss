@@ -69,7 +69,7 @@ h1 a {
 	
 	#navigation {
 		float: left;
-		margin-left: 0px;
+		margin-left: 200px;
 		margin-top: 6px;
 		
 		a {
@@ -124,11 +124,11 @@ h1 a {
 	}
 	
 	.fluid {
-		overflow: hidden;
+		overflow: auto;
 	
 		.primary {
 			float: left;
-			width: 280px;
+			width: 210px;
 			margin-left: -100%;
 			border-right: 1px solid #CCC;
 		}
@@ -140,7 +140,7 @@ h1 a {
 			
 			.wrapper {
 				padding: 0 20px;
-				margin-left: 280px;
+				margin-left: 210px;
 			}
 		}
 	}
