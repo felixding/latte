@@ -15,9 +15,14 @@ gem "ckeditor"
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
-gem "mysql2"
-#gem "pg"
+group :development do
+  gem 'sqlite3'
+  gem "mysql2"
+end
+
+group :production do
+  gem "pg"
+end
 
 gem 'execjs'
 gem 'therubyracer'
