@@ -32,7 +32,7 @@ class PagesController < ApplicationController
     @page.revert_to @page_version
     
     @project = @edition.versioned_project
-    @pages = @project.pages.arrange_nodes(@edition.versioned_pages)
+    @pages = @project.pages.arrange_nodes(@project.pages.sort_by_ancestry(@edition.versioned_pages))
     
     render "projects/trunk"
   end
