@@ -1,30 +1,19 @@
-<p id="notice"><%= notice %></p>
+<%= render "projects/header" %>
 
-<p>
-  <b>Project:</b>
-  <%= @page.project_id %>
-</p>
-
-<p>
-  <b>Creator:</b>
-  <%= @page.creator_id %>
-</p>
-
-<p>
-  <b>Updater:</b>
-  <%= @page.updater_id %>
-</p>
-
-<p>
-  <b>Title:</b>
-  <%= @page.title %>
-</p>
-
-<p>
-  <b>Body:</b>
-  <%= @page.body %>
-</p>
-
-
-<%= link_to 'Edit', edit_page_path(@page) %> |
-<%= link_to 'Back', pages_path %>
+<div class="fluid">
+	<div class="secondary">
+		<div class="wrapper">
+			<h2><%= @page.title %><%= content_tag :sup, @page.version, :class => :version, :title => "Version: #{@page.version}" %></h2>
+			<% if user_signed_in? && current_user.owns?(@page, :column => :creator_id) && controller.action_name != "show_edition_page" %>
+			<%= link_to "Edit", edit_project_page_path(@project, @page) %> | <%= link_to "Destroy", [@project, @page], :method => :delete, :confirm => "Are you sure?" %>
+			<% end %>
+			<div class="body"><%= raw write_legacy_paths(@page.body) %></div>
+		</div>
+	</div>
+	
+	<div class="primary">
+		<div class="pages-list">
+			<%= nested_ordered_list @project, @pages, @edition %>
+		</div>
+	</div>
+</div>

@@ -25,10 +25,7 @@ class Edition < ActiveRecord::Base
   
   def versioned_pages
     self.pages.collect do |page_id, page_version|
-      page = Page.find(page_id)
-      page.revert_to page_version
-      
-      page
+      Page.find_by_id_and_version_or_restore_from_history(page_id, page_version)
     end
   end
   

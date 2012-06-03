@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-  versioned
+  versioned :dependent => :tracking
   INDENT_MARKER = "\-"
 
   belongs_to :creator, :class_name => "User", :foreign_key => "creator_id"

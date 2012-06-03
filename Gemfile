@@ -1,19 +1,13 @@
 # fuckgfw!
- source 'http://rubygems.org'
-#source 'http://ruby.taobao.org/'  
+source 'http://rubygems.org'
+#source 'http://ruby.taobao.org/'
 
 gem 'rails', '3.1.3'
 
-#gem 'paper_trail', '~> 2'
-#gem 'vestal_versions', :git => 'git://github.com/adamcooper/vestal_versions'
 gem "devise"
 gem "ancestry"
-#gem 'bootstrap-sass', '~> 1.4.2'
 gem "paperclip"
 gem "ckeditor"
-
-# Bundle edge Rails instead:
-# gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
 group :development do
   gem 'sqlite3'

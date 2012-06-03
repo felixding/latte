@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   before_filter :authenticate_user!, :except => [:show, :show_edition_page]
-  before_filter :find_or_404, :only => [:show, :show_edition_page, :trunk, :edit, :update, :destroy]
+  before_filter :find_or_404, :only => [:show, :trunk, :edit, :update, :destroy]
   before_filter :hbaw, :only => [:show, :show_edition_page]
 
   # GET /pages
@@ -17,24 +17,27 @@ class PagesController < ApplicationController
   # GET /pages/1
   # GET /pages/1.json
   def show
-#    raise @project.pages.first.inspect
     @pages = @project.pages.arrange(:order => :index_id)
-    render "projects/trunk"
   end
   
   def show_edition_page
-    unless @edition = @project.editions.find(params[:edition_id])
+    begin
+      @project = Project.find_by_slug(params[:project_id])
+      @edition = @project.editions.find(params[:edition_id])
+      
+      page_id = params[:id].to_i
+      page_version = @edition.pages.select{|page| page.first == page_id}.first.last
+
+      @page = Page.find_by_id_and_version_or_restore_from_history(page_id, page_version)
+    rescue
       render_error "404"
       return
     end
-
-    @page_version = @edition.pages.select{|page| page.first == @page.id}.first.last
-    @page.revert_to @page_version
-    
+    #raise @edition.versioned_pages.collect{|p|p.class.to_s}.inspect
     @project = @edition.versioned_project
     @pages = @project.pages.arrange_nodes(@project.pages.sort_by_ancestry(@edition.versioned_pages))
     
-    render "projects/trunk"
+    render "show"
   end
 
   # GET /pages/new
@@ -88,10 +91,7 @@ class PagesController < ApplicationController
     @page = Page.find(params[:id])
     @page.destroy
 
-    respond_to do |format|
-      format.html { redirect_to (:back || @project) }
-      format.json { head :ok }
-    end
+    redirect_to trunk_project_url(@project), notice: "The page \"#{@page.title}\" was successfully destroyed."
   end
   
   private

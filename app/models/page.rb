@@ -1,5 +1,5 @@
 class Page < ActiveRecord::Base
-  versioned
+  versioned :dependent => :tracking
   has_ancestry
 
   belongs_to :project, :class_name => "Project", :foreign_key => "project_id"
@@ -16,5 +16,17 @@ class Page < ActiveRecord::Base
   end
   
   attr_accessible :title, :body
+  
+  def self.find_by_id_and_version_or_restore_from_history id, version
+    page = nil
+
+    if page = Page.find_by_id(id)
+      page.revert_to version
+    elsif page = VestalVersions::Version.first(conditions: {tag: "deleted", versioned_id: id})
+      page = page.restore
+    end
+    
+    page
+  end
 
 end
